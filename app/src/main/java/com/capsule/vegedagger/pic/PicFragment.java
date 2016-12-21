@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.capsule.vegedagger.base.BaseFragment;
 import com.capsule.vegedagger.base.MvpPresenter;
-import com.capsule.vegedagger.di.module.PresenterModule;
+import com.capsule.vegedagger.di.module.FragmentModule;
 
 /**
  * Created by hhly-pc on 2016/12/14.
@@ -19,7 +19,7 @@ public class PicFragment extends BaseFragment<PicPresenter> implements PicContra
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getFragmentComponentBuilder()
-                .presenterModule(new PresenterModule(this))
+                .fragmentModule(new FragmentModule(this))
                 .build()
                 .inject(this);
     }

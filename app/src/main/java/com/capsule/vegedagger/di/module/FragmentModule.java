@@ -13,11 +13,11 @@ import dagger.Provides;
  */
 
 @Module
-public class PresenterModule {
+public class FragmentModule {
 
     private MvpView mView;
 
-    public PresenterModule(MvpView mView) {
+    public FragmentModule(MvpView mView) {
         this.mView = mView;
     }
 
