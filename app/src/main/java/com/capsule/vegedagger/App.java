@@ -2,8 +2,11 @@ package com.capsule.vegedagger;
 
 import android.app.Application;
 
+import com.capsule.vegedagger.di.component.ApplicationComponent;
+import com.capsule.vegedagger.di.component.DaggerApplicationComponent;
 import com.capsule.vegedagger.di.component.DaggerDataComponent;
 import com.capsule.vegedagger.di.component.DataComponent;
+import com.capsule.vegedagger.di.module.ApplicationModule;
 import com.capsule.vegedagger.di.module.DataModule;
 
 
@@ -33,6 +36,14 @@ public class App extends Application {
         return DaggerDataComponent
                 .builder()
                 .dataModule(new DataModule(instance))
+                .build();
+    }
+
+    public static ApplicationComponent getApplicationComponent(){
+        return  DaggerApplicationComponent
+                .builder()
+                .dataComponent(App.getDataComponent())
+                .applicationModule(new ApplicationModule(App.getInstance()))
                 .build();
     }
 }

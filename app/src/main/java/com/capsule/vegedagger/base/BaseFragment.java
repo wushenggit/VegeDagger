@@ -1,8 +1,9 @@
 package com.capsule.vegedagger.base;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
+import com.capsule.vegedagger.App;
+import com.capsule.vegedagger.di.component.DaggerFragmentComponent;
 
 import javax.inject.Inject;
 
@@ -15,30 +16,11 @@ public abstract class BaseFragment<T extends MvpPresenter> extends Fragment impl
     @Inject
     protected T mPresenter;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-
+    protected DaggerFragmentComponent.Builder getFragmentComponentBuilder() {
+        return DaggerFragmentComponent
+                .builder()
+                .applicationComponent(App.getApplicationComponent());
     }
-
-
-//    protected  ApplicationComponent getApplicationComponent(){
-//        return  DaggerApplicationComponent
-//                .builder()
-//                .dataComponent(App.getDataComponent())
-//                .applicationModule(new ApplicationModule(App.getInstance()))
-//                .build();
-//    }
-
-
-
-
-//    private FragmentComponent getFragmentComponent(){
-//        return  DaggerFragmentComponent
-//                .builder()
-//                .applicationComponent(App.get)
-//
-//    }
 
 }

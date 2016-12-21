@@ -7,8 +7,7 @@ import android.widget.Toast;
 
 import com.capsule.vegedagger.base.BaseFragment;
 import com.capsule.vegedagger.base.MvpPresenter;
-
-import javax.inject.Inject;
+import com.capsule.vegedagger.di.module.PresenterModule;
 
 /**
  * Created by hhly-pc on 2016/12/14.
@@ -16,19 +15,19 @@ import javax.inject.Inject;
 
 public class MusicFragment extends BaseFragment<MusicPresenter> implements MusicContract.View {
 
-    @Inject
-    MusicPresenter mPresenter;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getFragmentComponentBuilder()
+                .presenterModule(new PresenterModule(this))
+                .build()
+                .inject(this);
 
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        DaggerFragmentComponent
-//                .builder()
-//                .applicationComponent(getApplicationComponent())
-//                .presenterModule(new PresenterModule(this))
-//                .build()
-//                .inject(this);
     }
 
     @Override

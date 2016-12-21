@@ -2,11 +2,11 @@ package com.capsule.vegedagger.pic;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.Toast;
 
 import com.capsule.vegedagger.base.BaseFragment;
 import com.capsule.vegedagger.base.MvpPresenter;
+import com.capsule.vegedagger.di.module.PresenterModule;
 
 /**
  * Created by hhly-pc on 2016/12/14.
@@ -14,24 +14,14 @@ import com.capsule.vegedagger.base.MvpPresenter;
 
 public class PicFragment extends BaseFragment<PicPresenter> implements PicContract.View {
 
-//    private PicContract.Presenter mPresenter;
-
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-//        DaggerPicComponent
-//                .builder()
-//                .dataComponent(((App) getActivity().getApplication()).getDataComponent())
-//                .picPresenterModule(new PicPresenterModule(this))
-//                .build()
-//                .inject(this);
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getFragmentComponentBuilder()
+                .presenterModule(new PresenterModule(this))
+                .build()
+                .inject(this);
     }
 
     @Override
