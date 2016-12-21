@@ -1,21 +1,46 @@
 package com.capsule.vegedagger.music;
 
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.Toast;
 
+import com.capsule.vegedagger.base.BaseFragment;
 import com.capsule.vegedagger.base.MvpPresenter;
+
+import javax.inject.Inject;
 
 /**
  * Created by hhly-pc on 2016/12/14.
  */
 
-public class MusicFragment extends Fragment implements  MusicContract.View {
+public class MusicFragment extends BaseFragment<MusicPresenter> implements MusicContract.View {
 
-    private MusicContract.Presenter mPresenter;
+    @Inject
+    MusicPresenter mPresenter;
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+//        DaggerFragmentComponent
+//                .builder()
+//                .applicationComponent(getApplicationComponent())
+//                .presenterModule(new PresenterModule(this))
+//                .build()
+//                .inject(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.getMusic();
+
+    }
 
     @Override
     public void setPresenter(MvpPresenter presenter) {
-        mPresenter = (MusicContract.Presenter) presenter;
+        mPresenter = (MusicPresenter) presenter;
     }
 
     @Override
@@ -29,10 +54,4 @@ public class MusicFragment extends Fragment implements  MusicContract.View {
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.getMusic();
-
-    }
 }

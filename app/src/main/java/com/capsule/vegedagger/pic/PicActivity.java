@@ -8,15 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.capsule.vegedagger.App;
 import com.capsule.vegedagger.R;
-
-import javax.inject.Inject;
 
 public class PicActivity extends AppCompatActivity {
 
-    @Inject
-    PicPresenter picPresenter;
+//    @Inject
+//    PicPresenter picPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +24,7 @@ public class PicActivity extends AppCompatActivity {
 
         PicFragment picFragment = new PicFragment();
 
-        DaggerPicComponent
-                .builder()
-                .dataComponent(((App) getApplication()).getDataComponent())
-                .picPresenterModule(new PicPresenterModule(picFragment))
-                .build()
-                .inject(this);
+
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

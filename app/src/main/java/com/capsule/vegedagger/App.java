@@ -2,8 +2,10 @@ package com.capsule.vegedagger;
 
 import android.app.Application;
 
-import com.capsule.vegedagger.date.DaggerDataComponent;
-import com.capsule.vegedagger.date.DataComponent;
+import com.capsule.vegedagger.di.component.DaggerDataComponent;
+import com.capsule.vegedagger.di.component.DataComponent;
+import com.capsule.vegedagger.di.module.DataModule;
+
 
 /**
  * Created by hhly-pc on 2016/12/14.
@@ -11,23 +13,26 @@ import com.capsule.vegedagger.date.DataComponent;
 
 public class App extends Application {
 
-    private DataComponent dataComponent;
+    private static App instance;
+
+    public static App getInstance() {
+        return instance;
+    }
+
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
 
-        dataComponent = DaggerDataComponent
-                .builder()
-                .applicationModule(new ApplicationModule(getApplicationContext()))
-//                .dataModule(new DataModule(getApplicationContext()))
-                .build();
 
     }
 
 
-    public DataComponent getDataComponent() {
-
-        return dataComponent;
+    public static DataComponent getDataComponent() {
+        return DaggerDataComponent
+                .builder()
+                .dataModule(new DataModule(instance))
+                .build();
     }
 }
