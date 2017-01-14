@@ -3,6 +3,7 @@ package com.capsule.vegedagger.di.module;
 import android.content.Context;
 
 import com.capsule.vegedagger.date.Data;
+import com.capsule.vegedagger.di.DataScope;
 
 import javax.inject.Singleton;
 
@@ -15,15 +16,17 @@ import dagger.Provides;
 @Module
 public class DataModule {
 
-    private Context mContext;
+//    private Context mContext;
+//
+//    public DataModule(Context mContext) {
+//        this.mContext = mContext;
+//    }
 
-    public DataModule(Context mContext) {
-        this.mContext = mContext;
-    }
+
 
     @Provides
-    @Singleton
-    Data provideData() {
+    @DataScope
+    Data provideData(Context mContext) {
         return new Data(mContext);
     }
 

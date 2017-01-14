@@ -18,6 +18,8 @@ public class App extends Application {
 
     private static App instance;
 
+    private static DataComponent dataComponent;
+
     public static App getInstance() {
         return instance;
     }
@@ -27,23 +29,20 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-
-
+        dataComponent = DaggerDataComponent.builder()
+                                           .applicationComponent(getApplicationComponent())
+                                           .dataModule(new DataModule())
+                                           .build();
     }
 
 
     public static DataComponent getDataComponent() {
-        return DaggerDataComponent
-                .builder()
-                .dataModule(new DataModule(instance))
-                .build();
+        return dataComponent;
     }
 
-    public static ApplicationComponent getApplicationComponent(){
-        return  DaggerApplicationComponent
-                .builder()
-                .dataComponent(App.getDataComponent())
-                .applicationModule(new ApplicationModule(App.getInstance()))
-                .build();
+    private ApplicationComponent getApplicationComponent() {
+        return DaggerApplicationComponent.builder()
+                                         .applicationModule(new ApplicationModule(instance))
+                                         .build();
     }
 }

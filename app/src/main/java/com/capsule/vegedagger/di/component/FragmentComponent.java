@@ -11,7 +11,7 @@ import dagger.Component;
  * Created by hhly-pc on 2016/12/21.
  */
 @FragmentScope
-@Component(dependencies = ApplicationComponent.class ,modules = FragmentModule.class)
+@Component(dependencies = DataComponent.class ,modules = FragmentModule.class)
 public interface FragmentComponent {
 
     void inject(MusicFragment musicFragment);

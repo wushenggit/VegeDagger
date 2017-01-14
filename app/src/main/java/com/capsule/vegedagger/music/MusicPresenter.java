@@ -17,8 +17,8 @@ public class MusicPresenter implements MusicContract.Presenter {
 
     @Inject
     public MusicPresenter(Data data, MusicContract.View mView) {
-        this.data = data;
         this.mView = mView;
+        this.data = data;
     }
 
     @Inject

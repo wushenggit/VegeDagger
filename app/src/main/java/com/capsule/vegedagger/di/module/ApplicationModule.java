@@ -1,5 +1,7 @@
 package com.capsule.vegedagger.di.module;
 
+import android.content.Context;
+
 import com.capsule.vegedagger.App;
 import com.capsule.vegedagger.di.ContextScope;
 
@@ -19,16 +21,23 @@ public class ApplicationModule {
         this.app = app;
     }
 
-//    @Provides
-//    @ContextScope
-//    Context provideContext() {
-//        return app.getApplicationContext();
-//    }
+    //    @Provides
+    //    @ContextScope
+    //    Context provideContext() {
+    //        return app.getApplicationContext();
+    //    }
 
     @Provides
     @ContextScope
     App provideApp() {
         return app;
     }
+
+    @Provides
+    @ContextScope
+    Context provideContext() {
+        return app.getApplicationContext();
+    }
+
 
 }
